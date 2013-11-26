@@ -47,6 +47,7 @@ To create a new message you need to follow 3 simple steps:
     controller('fooController', ['messageCenterService', function (messageCenterService) { … }]);
     ```
   1. Use the service methods. Feel free to explore the code for more available methods. For instance to add a message:
+
     ```js
     messageCenterService.add('success', 'Your action has been completed!', { status: messageCenterService.status.permanent });
     ```
