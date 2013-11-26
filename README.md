@@ -1,6 +1,6 @@
 # Message center service
 
-This service has been created as a replica of the features of [drupal_set_message](https://api.drupal.org/api/drupal/includes%21bootstrap.inc/function/drupal_set_message/7).
+This will allow you to add flash messages to your AngularJS app.
 
 This service will expose a little API to allow you to display user messages on your site that can be closed and configured.
 
