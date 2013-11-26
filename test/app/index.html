@@ -5,63 +5,77 @@
     <script src="components/angular/angular-route.js"></script>
     <script src="message-center.js"></script>
     <script>
-      angular.module('flash.e2e', ['flash', 'ngRoute'])
+      angular.module('messageCenter.e2e', ['MessageCenterModule', 'ngRoute'])
       .config(function($routeProvider) {
         $routeProvider
           .when('/',     { templateUrl: 'home' })
-          .when('/edit', { templateUrl: 'edit' });
+          .when('/edit', { templateUrl: 'edit' })
+          .when('/permanent', { templateUrl: 'permanent' });
       })
 
-      .controller('HomeController', function($scope, $location, messages) {
+      .controller('HomeController', function($scope, $location, messageCenterService) {
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
         $scope.goEdit = function() {
           $location.path('/edit');
         };
+        $scope.goPermanent = function() {
+          messageCenterService.add('success', 'Showing permanent message!', {status: messageCenterService.status.permanent});
+          $location.path('/permanent');
+        };
         $scope.goEditSuccess = function() {
-          messages.add('success', 'You have reached the edit page!');
+          messageCenterService.add('success', 'You have reached the edit page!', {status: messageCenterService.status.next});
           $scope.goEdit();
         };
         $scope.goEditMultipleSuccess = function() {
-          messages.add('success', 'Yay!');
-          messages.add('success', 'You have reached the edit page!');
+          messageCenterService.add('success', 'Yay!', {status: messageCenterService.status.next});
+          messageCenterService.add('success', 'You have reached the edit page!', {status: messageCenterService.status.next});
           $scope.goEdit();
         };
         $scope.goEditMultipleTypes = function() {
-          messages.add('success', 'Yay!');
-          messages.add('error', 'Something went wrong!');
+          messageCenterService.add('success', 'Yay!', {status: messageCenterService.status.next});
+          messageCenterService.add('danger', 'Something went wrong!', {status: messageCenterService.status.next});
           $scope.goEdit();
         };
         $scope.goEditFailure = function() {
-          messages.add('error', 'Something went wrong!');
+          messageCenterService.add('danger', 'Something went wrong!', {status: messageCenterService.status.next});
           $scope.goEdit();
         };
       })
 
-      .controller('EditController', function($scope, $location, flash) {
-        $scope.saveSuccess = function() { flash('Saved successfully!'); };
+      .controller('EditController', function($scope, $location, messageCenterService) {
+        $scope.saveSuccess = function() {
+          messageCenterService.add('success', 'Saved successfully!');
+        };
         $scope.saveMultipleSuccess = function() {
-          messages.add('success', 'Yay!');
-          messages.add('success', 'Saved successfully!');
+          messageCenterService.add('success', 'Yay!');
+          messageCenterService.add('success', 'Saved successfully!');
         };
         $scope.saveMultipleTypes = function() {
-          messages.add('success', 'Yay!');
-          messages.add('error', 'Something went wrong!');
+          messageCenterService.add('success', 'Yay!');
+          messageCenterService.add('danger', 'Something went wrong!');
         };
         $scope.saveFailure = function() {
-          messages.add('error', 'Something went wrong!');
+          messageCenterService.add('danger', 'Something went wrong!');
         };
       });
     </script>
   </head>
 
-  <body ng:app="flash.e2e">
+  <body ng:app="messageCenter.e2e">
     <script type="text/ng-template" id="home">
       <article ng:controller="HomeController" >
         <h1>Home</h1>
-        <button id="goEdit" ng:click="goEdit()">Edit</button>
+        <button id="goIndex" ng:click="goIndex()">Index page</button>
+        <button id="goEdit" ng:click="goEdit()">Edit page</button>
+        <button id="goPermanent" ng:click="goPermanent()">Permanent page</button>
         <button id="goEditSuccess" ng:click="goEditSuccess()">Edit (success)</button>
         <button id="goEditMultipleSuccess" ng:click="goEditMultipleSuccess()">Edit (multiple success)</button>
         <button id="goEditMultipleTypes" ng:click="goEditMultipleTypes()">Edit (multiple types)</button>
         <button id="goEditFailure" ng:click="goEditFailure()">Edit (failure)</button>
+        <button id="testPermanent" ng:click="testPermanent()">Test permanent</button>
+        <button id="testPermanentClose" ng:click="testPermanent()">Test permanent (close)</button>
       </article>
     </script>
 
@@ -75,7 +89,7 @@
       </article>
     </script>
 
-    <flash:messages></flash:messages>
+    <div mc-messages></div>
     <article ng:view />
   </body>
 </html>
