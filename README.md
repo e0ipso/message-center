@@ -57,3 +57,7 @@ The directive `mcMessages` will allow you to place the messages wherever you wan
 
 ## Bootstrap
 This messages integrate seamlessly with the alerts from Twitter bootstrap.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mateu-aguilo-bosch/message-center/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
