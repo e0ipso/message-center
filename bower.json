@@ -1,6 +1,6 @@
 {
   "name"            : "message-center",
-  "version"         : "1.0.0",
+  "version"         : "1.0.1",
   "description"     : "AngularJS Message Center",
   "keywords"        : [ "angular", "js", "messages", "alert", "bootstrap" ],
   "author"          : "Mateu Aguiló Bosch <mateu.aguilo.bosch@gmail.com>",
