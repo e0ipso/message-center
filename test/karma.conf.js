@@ -6,12 +6,12 @@ module.exports = function(config) { config.set({
   urlRoot       : '/_karma_/',
   frameworks    : ['ng-scenario', 'mocha'],
   files         : [
-    'app/components/angular/angular-mocks.js',
+    'app/components/angular-mocks/angular-mocks.js',
     'scenarios.js'
   ],
   reporters     : ['dots'],
   logLevel      : config.LOG_ERROR,
 
-  browsers      : ['Firefox'],
+  browsers      : ['PhantomJS'],
   captureTimeout: 10000
 });};

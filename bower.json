@@ -1,12 +1,14 @@
 {
-  "name"           : "message-center",
-  "version"        : "1.0.0",
-  "description"    : "AngularJS Message Center",
-  "keywords"       : [ "angular", "js", "messages", "alert", "bootstrap" ],
-  "author"         : "Mateu Aguiló Bosch <mateu.aguilo.bosch@gmail.com>",
-  "readmeFilename" : "README.md",
-  "dependencies"   : {
-    "angular"      : "~1.2.0"
+  "name"            : "message-center",
+  "version"         : "1.0.0",
+  "description"     : "AngularJS Message Center",
+  "keywords"        : [ "angular", "js", "messages", "alert", "bootstrap" ],
+  "author"          : "Mateu Aguiló Bosch <mateu.aguilo.bosch@gmail.com>",
+  "readmeFilename"  : "README.md",
+  "dependencies"    : {
+    "angular"       : "~1.2.0",
+    "angular-route" : "~1.2.0",
+    "angular-mocks" : "~1.2.0"
   },
-  "ignore"         : [ "**/.*", "node_modules", "test" ]
+  "ignore"          : [ "**/.*", "node_modules", "test" ]
 }

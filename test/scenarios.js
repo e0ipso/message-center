@@ -16,7 +16,7 @@ describe('Message Center', function() {
       element('#saveSuccess').click();
       var messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-success');
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
       expect(messages.text()).toMatch('Saved successfully!');
     });
 
@@ -24,27 +24,27 @@ describe('Message Center', function() {
       element('#saveFailure').click();
       var messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-danger');
+      expect(messages.prop('className')).toEqual('alert alert-danger fade in');
       expect(messages.text()).toMatch('Something went wrong!');
     });
 
     it('renders multiple messages with the default "success" level and text', function() {
       element('#saveMultipleSuccess').click();
       var yay = element('div#mc-messages-wrapper .alert:first');
-      expect(yay.prop('className')).toEqual('alert fade in alert-success');
+      expect(yay.prop('className')).toEqual('alert alert-success fade in');
       expect(yay.text()).toMatch('Yay!');
       var saved = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
-      expect(saved.prop('className')).toEqual('alert fade in alert-success');
+      expect(saved.prop('className')).toEqual('alert alert-success fade in');
       expect(saved.text()).toMatch('Saved successfully!');
     });
 
     it('renders multiple messages with the level and text provided', function() {
       element('#saveMultipleTypes').click();
       var yay = element('div#mc-messages-wrapper .alert:first');
-      expect(yay.prop('className')).toEqual('alert fade in alert-success');
+      expect(yay.prop('className')).toEqual('alert alert-success fade in');
       expect(yay.text()).toMatch('Yay!');
       var somethingWrong = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
-      expect(somethingWrong.prop('className')).toEqual('alert fade in alert-danger');
+      expect(somethingWrong.prop('className')).toEqual('alert alert-danger fade in');
       expect(somethingWrong.text()).toMatch('Something went wrong!');
     });
   });
@@ -55,7 +55,7 @@ describe('Message Center', function() {
       element('#goEditSuccess').click();
       var messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-success');
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
       expect(messages.text()).toMatch('You have reached the edit page!');
     });
 
@@ -63,27 +63,27 @@ describe('Message Center', function() {
       element('#goEditFailure').click();
       var messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-danger');
+      expect(messages.prop('className')).toEqual('alert alert-danger fade in');
       expect(messages.text()).toMatch('Something went wrong!');
     });
 
     it('renders multiple messages with the default "success" level and text', function() {
       element('#goEditMultipleSuccess').click();
       var yay = element('div#mc-messages-wrapper .alert:first');
-      expect(yay.prop('className')).toEqual('alert fade in alert-success');
+      expect(yay.prop('className')).toEqual('alert alert-success fade in');
       expect(yay.text()).toMatch('Yay!');
       var youveReached = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
-      expect(youveReached.prop('className')).toEqual('alert fade in alert-success');
+      expect(youveReached.prop('className')).toEqual('alert alert-success fade in');
       expect(youveReached.text()).toMatch('You have reached the edit page!');
     });
 
     it('renders multiple messages with the level and text provided', function() {
       element('#goEditMultipleTypes').click();
       var yay = element('div#mc-messages-wrapper .alert:first');
-      expect(yay.prop('className')).toEqual('alert fade in alert-success');
+      expect(yay.prop('className')).toEqual('alert alert-success fade in');
       expect(yay.text()).toMatch('Yay!');
       var somethingWrong = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
-      expect(somethingWrong.prop('className')).toEqual('alert fade in alert-danger');
+      expect(somethingWrong.prop('className')).toEqual('alert alert-danger fade in');
       expect(somethingWrong.text()).toMatch('Something went wrong!');
     });
   });
@@ -95,7 +95,7 @@ describe('Message Center', function() {
     it('still renders a permanent message', function () {
       var messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-success');
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
       expect(messages.text()).toMatch('Showing permanent message!');
       element('#goIndex').click();
       element('#goPermanent').click();
@@ -103,23 +103,23 @@ describe('Message Center', function() {
       messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(2);
       var message = element('div#mc-messages-wrapper .alert:first');
-      expect(message.prop('className')).toEqual('alert fade in alert-success');
+      expect(message.prop('className')).toEqual('alert alert-success fade in');
       expect(message.text()).toMatch('Showing permanent message!');
       messages = element('div#mc-messages-wrapper .alert');
       message = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
       expect(messages.count()).toBe(2);
-      expect(message.prop('className')).toEqual('alert fade in alert-success');
+      expect(message.prop('className')).toEqual('alert alert-success fade in');
       expect(message.text()).toMatch('Showing permanent message!');
     });
     it('renders a permanent message and then closes it', function () {
       var messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-success');
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
       expect(messages.text()).toMatch('Showing permanent message!');
       element('#goIndex').click();
       messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(1);
-      expect(messages.prop('className')).toEqual('alert fade in alert-success');
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
       expect(messages.text()).toMatch('Showing permanent message!');
       element('div#mc-messages-wrapper .alert .close').click();
       messages = element('div#mc-messages-wrapper .alert');
