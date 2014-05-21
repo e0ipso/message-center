@@ -1,6 +1,5 @@
 var minifyRequired = !!process.env.MINIFY;
 
-
 var connect = require('connect');
 var app = module.exports = connect();
 app.use(require('connect-route')(function (router) {
