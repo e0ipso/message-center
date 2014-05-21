@@ -1,3 +1,4 @@
+/*jshint strict:false */
 'use strict';
 
 // Create a new angular module.
@@ -69,16 +70,18 @@ MessageCenterModule.
   ]);
 MessageCenterModule.
   directive('mcMessages', ['$rootScope', 'messageCenterService', function ($rootScope, messageCenterService) {
+    /*jshint multistr: true */
+    var templateString = '\
+    <div id="mc-messages-wrapper">\
+      <div class="alert alert-{{ message.type }} fade in" ng-repeat="message in mcMessages">\
+        <a class="close" ng-click="message.close();" data-dismiss="alert" aria-hidden="true">&times;</a>\
+        {{ message.message }}\
+      </div>\
+    </div>\
+    ';
     return {
       restrict: 'EA',
-      template: '\
-      <div id="mc-messages-wrapper">\
-        <div class="alert alert-{{ message.type }} fade in" ng-repeat="message in mcMessages">\
-          <a class="close" ng-click="message.close();" data-dismiss="alert" aria-hidden="true">&times;</a>\
-          {{ message.message }}\
-        </div>\
-      </div>\
-      ',
+      template: templateString,
       link: function(scope, element, attrs) {
         var changeReaction = function (event, to, from) {
           // Update 'unseen' messages to be marked as 'shown'.
