@@ -1,6 +1,6 @@
 {
   "name"               : "message-center",
-  "version"            : "1.1.0",
+  "version"            : "1.0.2",
   "description"        : "AngularJS Message Center",
   "repository"         : {
     "type"             : "git",
@@ -14,12 +14,12 @@
   "author"             : "Mateu Aguiló Bosch <mateu.aguilo.bosch@gmail.com>",
   "readmeFilename"     : "README.md",
   "devDependencies"    : {
-    "connect"          : "2.10",
-    "connect-route"    : "0.1",
-    "uglify-js"        : "2.4",
-    "bower"            : "1.2",
+    "connect"          : "~2.10",
+    "connect-route"    : "~0.1",
+    "uglify-js"        : "~2.4",
+    "bower"            : "~1.2",
     "karma"            : "canary",
-    "karma-mocha"      : "0.1",
-    "karma-ng-scenario": "0.1"
+    "karma-mocha"      : "~0.1",
+    "karma-ng-scenario": "~0.1"
   }
 }

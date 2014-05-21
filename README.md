@@ -46,7 +46,7 @@ To create a new message you need to follow 3 simple steps:
 
     ```js
     angular.module('myApp.controllers', []). // Since you injected globally in app.js you don't need to do it here.
-    controller('fooController', ['messageCenterService', function (messageCenterService) { … }]);
+    controller('fooController', ['messageCenterService', function (messageCenterService) { … }]);
     ```
   1. Use the service methods. Feel free to explore the code for more available methods. For instance to add a message:
 
