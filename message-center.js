@@ -75,7 +75,7 @@ MessageCenterModule.
     <div id="mc-messages-wrapper">\
       <div class="alert alert-{{ message.type }} fade in" ng-repeat="message in mcMessages">\
         <a class="close" ng-click="message.close();" data-dismiss="alert" aria-hidden="true">&times;</a>\
-        {{ message.message }}\
+        <span ng-bind-html="message.message"></span>\
       </div>\
     </div>\
     ';
