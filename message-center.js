@@ -44,6 +44,7 @@ MessageCenterModule.
             }, options.timeout);
           }
           this.mcMessages.push(messageObject);
+          return messageObject;
         },
         remove: function (message) {
           var index = this.mcMessages.indexOf(message);
