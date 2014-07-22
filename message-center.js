@@ -6,8 +6,8 @@ var MessageCenterModule = angular.module('MessageCenterModule', []);
 
 // Define a service to inject.
 MessageCenterModule.
-  service('messageCenterService', ['$sce',
-    function ($sce) {
+  service('messageCenterService', ['$sce', '$timeout',
+    function ($sce, $timeout) {
       return {
         mcMessages: this.mcMessages || [],
         status: {
@@ -38,6 +38,11 @@ MessageCenterModule.
           };
           messageObject.message = options.html ? $sce.trustAsHtml(message) : message;
           messageObject.html = !!options.html;
+          if (angular.isDefined(options.timeout)) {
+            messageObject.timer = $timeout(function () {
+              messageObject.close();
+            }, options.timeout);
+          }
           this.mcMessages.push(messageObject);
         },
         remove: function (message) {
