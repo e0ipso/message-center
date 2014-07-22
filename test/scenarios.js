@@ -129,4 +129,26 @@ describe('Message Center', function() {
       expect(messages.count()).toBe(0);
     });
   });
+
+  describe('when going to the allowed HTML page', function(){
+    beforeEach(function() { element('#goHTML').click(); });
+
+    it('renders a message with HTML enabled', function() {
+      element('#allowedHTML').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
+      expect(messages.text()).toMatch('HTML is allowed.');
+    });
+
+    it('renders a message with HTML disabled', function() {
+      element('#plainText').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-warning fade in');
+      expect(messages.text()).toMatch('<strong>HTML</strong> <em>is</em> NOT <span>allowed</span>.');
+    });
+
+  });
+
 });
