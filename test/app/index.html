@@ -63,33 +63,33 @@
     </script>
   </head>
 
-  <body ng:app="messageCenter.e2e">
+  <body data-ng-app="messageCenter.e2e">
     <script type="text/ng-template" id="home">
-      <article ng:controller="HomeController" >
+      <article data-ng-controller="HomeController" >
         <h1>Home</h1>
-        <button id="goIndex" ng:click="goIndex()">Index page</button>
-        <button id="goEdit" ng:click="goEdit()">Edit page</button>
-        <button id="goPermanent" ng:click="goPermanent()">Permanent page</button>
-        <button id="goEditSuccess" ng:click="goEditSuccess()">Edit (success)</button>
-        <button id="goEditMultipleSuccess" ng:click="goEditMultipleSuccess()">Edit (multiple success)</button>
-        <button id="goEditMultipleTypes" ng:click="goEditMultipleTypes()">Edit (multiple types)</button>
-        <button id="goEditFailure" ng:click="goEditFailure()">Edit (failure)</button>
-        <button id="testPermanent" ng:click="testPermanent()">Test permanent</button>
-        <button id="testPermanentClose" ng:click="testPermanent()">Test permanent (close)</button>
+        <button id="goIndex" data-ng-click="goIndex()">Index page</button>
+        <button id="goEdit" data-ng-click="goEdit()">Edit page</button>
+        <button id="goPermanent" data-ng-click="goPermanent()">Permanent page</button>
+        <button id="goEditSuccess" data-ng-click="goEditSuccess()">Edit (success)</button>
+        <button id="goEditMultipleSuccess" data-ng-click="goEditMultipleSuccess()">Edit (multiple success)</button>
+        <button id="goEditMultipleTypes" data-ng-click="goEditMultipleTypes()">Edit (multiple types)</button>
+        <button id="goEditFailure" data-ng-click="goEditFailure()">Edit (failure)</button>
+        <button id="testPermanent" data-ng-click="testPermanent()">Test permanent</button>
+        <button id="testPermanentClose" data-ng-click="testPermanent()">Test permanent (close)</button>
       </article>
     </script>
 
     <script type="text/ng-template" id="edit">
-      <article ng:controller="EditController">
+      <article data-ng-controller="EditController">
         <h1>Edit</h1>
-        <button id="saveSuccess" ng:click="saveSuccess()">Save</button>
-        <button id="saveMultipleSuccess" ng:click="saveMultipleSuccess()">Save (multiple success)</button>
-        <button id="saveMultipleTypes" ng:click="saveMultipleTypes()">Save (multiple types)</button>
-        <button id="saveFailure" ng:click="saveFailure()">Save (failure)</button>
+        <button id="saveSuccess" data-ng-click="saveSuccess()">Save</button>
+        <button id="saveMultipleSuccess" data-ng-click="saveMultipleSuccess()">Save (multiple success)</button>
+        <button id="saveMultipleTypes" data-ng-click="saveMultipleTypes()">Save (multiple types)</button>
+        <button id="saveFailure" data-ng-click="saveFailure()">Save (failure)</button>
       </article>
     </script>
 
     <div mc-messages></div>
-    <article ng:view />
+    <article data-ng-view />
   </body>
 </html>

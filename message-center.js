@@ -6,8 +6,8 @@ var MessageCenterModule = angular.module('MessageCenterModule', []);
 
 // Define a service to inject.
 MessageCenterModule.
-  service('messageCenterService', [
-    function () {
+  service('messageCenterService', ['$rootScope',
+    function ($rootScope) {
       return {
         mcMessages: this.mcMessages || [],
         status: {
@@ -64,6 +64,9 @@ MessageCenterModule.
               this.mcMessages[index].processed = true;
             }
           }
+        },
+        flush: function () {
+          $rootScope.mcMessages = this.mcMessages;
         }
       };
     }
@@ -89,6 +92,7 @@ MessageCenterModule.
           // Remove the messages that have been shown.
           messageCenterService.removeShown();
           $rootScope.mcMessages = messageCenterService.mcMessages;
+          messageCenterService.flush();
         };
         $rootScope.$on('$locationChangeStart', changeReaction);
       }
