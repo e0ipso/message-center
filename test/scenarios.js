@@ -130,3 +130,54 @@ describe('Message Center', function() {
     });
   });
 });
+
+describe('Message Center', function() {
+
+  beforeEach(module('MessageCenterModule'));
+
+  beforeEach(function() { browser().navigateTo('/index2.html'); });
+
+  it('renders an empty ordered list on its initial state', function() {
+    expect(element('div#mc-messages-wrapper').count()).toBe(1);
+    expect(element('div#mc-messages-wrapper .alert').count()).toBe(0);
+  });
+
+  describe('when on the same view without routing', function(){
+
+    it('renders a message with the default "success" level', function() {
+      element('#saveSuccess').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
+      expect(messages.text()).toMatch('Saved successfully!');
+    });
+
+    it('renders a message with the level and text provided', function() {
+      element('#saveFailure').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-danger fade in');
+      expect(messages.text()).toMatch('Something went wrong!');
+    });
+
+    it('renders multiple messages with the default "success" level and text', function() {
+      element('#saveMultipleSuccess').click();
+      var yay = element('div#mc-messages-wrapper .alert:first');
+      expect(yay.prop('className')).toEqual('alert alert-success fade in');
+      expect(yay.text()).toMatch('Yay!');
+      var saved = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
+      expect(saved.prop('className')).toEqual('alert alert-success fade in');
+      expect(saved.text()).toMatch('Saved successfully!');
+    });
+
+    it('renders multiple messages with the level and text provided', function() {
+      element('#saveMultipleTypes').click();
+      var yay = element('div#mc-messages-wrapper .alert:first');
+      expect(yay.prop('className')).toEqual('alert alert-success fade in');
+      expect(yay.text()).toMatch('Yay!');
+      var somethingWrong = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
+      expect(somethingWrong.prop('className')).toEqual('alert alert-danger fade in');
+      expect(somethingWrong.text()).toMatch('Something went wrong!');
+    });
+  });
+});

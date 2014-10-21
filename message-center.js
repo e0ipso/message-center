@@ -86,6 +86,8 @@ MessageCenterModule.
       restrict: 'EA',
       template: templateString,
       link: function(scope, element, attrs) {
+        // Bind the messages from the service to the root scope.
+        messageCenterService.flush();
         var changeReaction = function (event, to, from) {
           // Update 'unseen' messages to be marked as 'shown'.
           messageCenterService.markShown();
