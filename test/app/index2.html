@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="components/angular/angular.js"></script>
+    <script src="components/angular-route/angular-route.js"></script>
+    <script src="message-center.js"></script>
+    <script>
+      angular.module('messageCenter2.e2e', ['MessageCenterModule'])
+
+      .controller('EditController', function($scope, messageCenterService) {
+        $scope.saveSuccess = function() {
+          messageCenterService.add('success', 'Saved successfully!');
+        };
+        $scope.saveMultipleSuccess = function() {
+          messageCenterService.add('success', 'Yay!');
+          messageCenterService.add('success', 'Saved successfully!');
+        };
+        $scope.saveMultipleTypes = function() {
+          messageCenterService.add('success', 'Yay!');
+          messageCenterService.add('danger', 'Something went wrong!');
+        };
+        $scope.saveFailure = function() {
+          messageCenterService.add('danger', 'Something went wrong!');
+        };
+      })
+    </script>
+  </head>
+
+  <body data-ng-app="messageCenter2.e2e">
+    <div mc-messages></div>
+    <article data-ng-controller="EditController">
+      <h1>Edit</h1>
+      <button id="saveSuccess" data-ng-click="saveSuccess()">Save</button>
+      <button id="saveMultipleSuccess" data-ng-click="saveMultipleSuccess()">Save (multiple success)</button>
+      <button id="saveMultipleTypes" data-ng-click="saveMultipleTypes()">Save (multiple types)</button>
+      <button id="saveFailure" data-ng-click="saveFailure()">Save (failure)</button>
+    </article>
+  </body>
+</html>

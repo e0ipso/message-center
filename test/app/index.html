@@ -10,6 +10,7 @@
         $routeProvider
           .when('/',     { templateUrl: 'home' })
           .when('/edit', { templateUrl: 'edit' })
+          .when('/html', { templateUrl: 'html' })
           .when('/permanent', { templateUrl: 'permanent' });
       })
 
@@ -19,6 +20,9 @@
         };
         $scope.goEdit = function() {
           $location.path('/edit');
+        };
+        $scope.goHTML = function() {
+          $location.path('/html');
         };
         $scope.goPermanent = function() {
           messageCenterService.add('success', 'Showing permanent message!', {status: messageCenterService.status.permanent});
@@ -59,6 +63,15 @@
         $scope.saveFailure = function() {
           messageCenterService.add('danger', 'Something went wrong!');
         };
+      })
+
+      .controller('AllowHTMLController', function($scope, $location, messageCenterService) {
+        $scope.allowedHTML = function() {
+          messageCenterService.add('success', '<strong>HTML</strong> <em>is</em> <span>allowed</span>.', {html: true});
+        };
+        $scope.plainText = function() {
+          messageCenterService.add('warning', '<strong>HTML</strong> <em>is</em> NOT <span>allowed</span>.');
+        };
       });
     </script>
   </head>
@@ -69,6 +82,7 @@
         <h1>Home</h1>
         <button id="goIndex" data-ng-click="goIndex()">Index page</button>
         <button id="goEdit" data-ng-click="goEdit()">Edit page</button>
+        <button id="goHTML" data-ng-click="goHTML()">HTML page</button>
         <button id="goPermanent" data-ng-click="goPermanent()">Permanent page</button>
         <button id="goEditSuccess" data-ng-click="goEditSuccess()">Edit (success)</button>
         <button id="goEditMultipleSuccess" data-ng-click="goEditMultipleSuccess()">Edit (multiple success)</button>
@@ -86,6 +100,14 @@
         <button id="saveMultipleSuccess" data-ng-click="saveMultipleSuccess()">Save (multiple success)</button>
         <button id="saveMultipleTypes" data-ng-click="saveMultipleTypes()">Save (multiple types)</button>
         <button id="saveFailure" data-ng-click="saveFailure()">Save (failure)</button>
+      </article>
+    </script>
+
+    <script type="text/ng-template" id="html">
+      <article data-ng-controller="AllowHTMLController">
+        <h1>HTML</h1>
+        <button id="allowedHTML" data-ng-click="allowedHTML()">Allowed HTML</button>
+        <button id="plainText" data-ng-click="plainText()">Plain Text</button>
       </article>
     </script>
 

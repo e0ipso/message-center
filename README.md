@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mateu-aguilo-bosch/message-center.png?branch=master)](https://travis-ci.org/mateu-aguilo-bosch/message-center) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mateu-aguilo-bosch/message-center/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Build Status](https://travis-ci.org/mateu-aguilo-bosch/message-center.png?branch=master)](https://travis-ci.org/mateu-aguilo-bosch/message-center)
 
 # Message center service
 
@@ -53,6 +53,20 @@ To create a new message you need to follow 3 simple steps:
     ```js
     messageCenterService.add('success', 'Your action has been completed!', { status: messageCenterService.status.permanent });
     ```
+
+#### HTML
+If you need to add HTML to a message you can do so by passing in the `html` option. HTML is disabled by default.
+
+```js
+messageCenterService.add('success', '<strong>HTML</strong> <em>is</em> <span>allowed</span>.', { html: true });
+```
+
+### Timer
+You can add a timer to the alert so it auto dismisses. To do so, just add a timeout option in miliseconds.
+
+```js
+messageCenterService.add('success', 'Bye bye in 3s!', { timeout: 3000 });
+```
 
 ## Directive
 The directive `mcMessages` will allow you to place the messages wherever you want in your layout. Just drop `<mc-messages></mc-messages>` or `<div mc-messages></div>` somewhere in your partials and if there are any messages to be shown they will be shown there. Since it's a regular directive you can perform the common alterations and modifications to it to suit your needs.

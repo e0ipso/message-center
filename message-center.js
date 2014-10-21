@@ -6,8 +6,8 @@ var MessageCenterModule = angular.module('MessageCenterModule', []);
 
 // Define a service to inject.
 MessageCenterModule.
-  service('messageCenterService', ['$rootScope',
-    function ($rootScope) {
+  service('messageCenterService', ['$rootScope', '$sce', '$timeout',
+    function ($rootScope, $sce, $timeout) {
       return {
         mcMessages: this.mcMessages || [],
         status: {
@@ -28,15 +28,23 @@ MessageCenterModule.
           if (availableTypes.indexOf(type) == -1) {
             throw "Invalid message type";
           }
-          this.mcMessages.push({
+          var messageObject = {
             type: type,
-            message: message,
             status: options.status || this.status.unseen,
             processed: false,
             close: function() {
               return service.remove(this);
             }
-          });
+          };
+          messageObject.message = options.html ? $sce.trustAsHtml(message) : message;
+          messageObject.html = !!options.html;
+          if (angular.isDefined(options.timeout)) {
+            messageObject.timer = $timeout(function () {
+              messageObject.close();
+            }, options.timeout);
+          }
+          this.mcMessages.push(messageObject);
+          return messageObject;
         },
         remove: function (message) {
           var index = this.mcMessages.indexOf(message);
@@ -76,9 +84,15 @@ MessageCenterModule.
     /*jshint multistr: true */
     var templateString = '\
     <div id="mc-messages-wrapper">\
-      <div class="alert alert-{{ message.type }} fade in" ng-repeat="message in mcMessages">\
+      <div class="alert alert-{{ message.type }} {{ animation }}" ng-repeat="message in mcMessages">\
         <a class="close" ng-click="message.close();" data-dismiss="alert" aria-hidden="true">&times;</a>\
-        {{ message.message }}\
+        <span ng-switch on="message.html">\
+        <span ng-switch-when="true">\
+          <span ng-bind-html="message.message"></span>\
+        </span>\
+        <span ng-switch-default>\
+          {{ message.message }}\
+        </span>\
       </div>\
     </div>\
     ';
@@ -97,6 +111,8 @@ MessageCenterModule.
           messageCenterService.flush();
         };
         $rootScope.$on('$locationChangeStart', changeReaction);
+
+        scope.animation = attrs.animation || 'fade in';
       }
     };
   }]);
