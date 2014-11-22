@@ -65,11 +65,11 @@ MessageCenterModule.
             if (!this.mcMessages[index].processed) {
               if (this.mcMessages[index].status == this.status.unseen) {
                 this.mcMessages[index].status = this.status.shown;
+                this.mcMessages[index].processed = true;
               }
               else if (this.mcMessages[index].status == this.status.next) {
                 this.mcMessages[index].status = this.status.unseen;
               }
-              this.mcMessages[index].processed = true;
             }
           }
         },

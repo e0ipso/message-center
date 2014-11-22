@@ -63,6 +63,13 @@
         $scope.saveFailure = function() {
           messageCenterService.add('danger', 'Something went wrong!');
         };
+        $scope.saveSuccessGoHome = function() {
+          messageCenterService.add('success', 'Saved successfully and went home!', {status: messageCenterService.status.next});
+          $scope.goIndex();
+        };
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
       })
 
       .controller('AllowHTMLController', function($scope, $location, messageCenterService) {
@@ -72,7 +79,14 @@
         $scope.plainText = function() {
           messageCenterService.add('warning', '<strong>HTML</strong> <em>is</em> NOT <span>allowed</span>.');
         };
-      });
+      })
+
+      .controller('PermanentController', function($scope, $location, messageCenterService) {
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
+      })
+      ;
     </script>
   </head>
 
@@ -100,6 +114,8 @@
         <button id="saveMultipleSuccess" data-ng-click="saveMultipleSuccess()">Save (multiple success)</button>
         <button id="saveMultipleTypes" data-ng-click="saveMultipleTypes()">Save (multiple types)</button>
         <button id="saveFailure" data-ng-click="saveFailure()">Save (failure)</button>
+        <button id="saveSuccessGoHome" data-ng-click="saveSuccessGoHome()">Save and Go Home</button>
+
       </article>
     </script>
 
@@ -108,6 +124,13 @@
         <h1>HTML</h1>
         <button id="allowedHTML" data-ng-click="allowedHTML()">Allowed HTML</button>
         <button id="plainText" data-ng-click="plainText()">Plain Text</button>
+      </article>
+    </script>
+
+    <script type="text/ng-template" id="permanent">
+      <article data-ng-controller="PermanentController">
+        <h1>Permanent</h1>
+          <button id="goIndex" data-ng-click="goIndex()">Index page</button>
       </article>
     </script>
 
