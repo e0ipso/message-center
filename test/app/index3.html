@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="components/angular/angular.js"></script>
+    <script src="components/angular-route/angular-route.js"></script>
+    <script src="message-center.js"></script>
+    <script>
+      angular.module('messageCenter.e2e', ['MessageCenterModule', 'ngRoute'])
+      .config(function($routeProvider) {
+        $routeProvider
+          .when('/',     { templateUrl: 'home' })
+          .when('/edit', { templateUrl: 'edit' })
+          .when('/html', { templateUrl: 'html' })
+          .when('/permanent', { templateUrl: 'permanent' });
+      })
+
+      .controller('HomeController', function($scope, $location, messageCenterService) {
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
+        $scope.goEdit = function() {
+          $location.path('/edit');
+        };
+        $scope.goHTML = function() {
+          $location.path('/html');
+        };
+        $scope.goPermanent = function() {
+          messageCenterService.add('success', 'Showing permanent message!', {status: messageCenterService.status.permanent});
+          $location.path('/permanent');
+        };
+        $scope.goEditSuccess = function() {
+          messageCenterService.add('success', 'You have reached the edit page!', {status: messageCenterService.status.next});
+          $scope.goEdit();
+        };
+        $scope.goEditMultipleSuccess = function() {
+          messageCenterService.add('success', 'Yay!', {status: messageCenterService.status.next});
+          messageCenterService.add('success', 'You have reached the edit page!', {status: messageCenterService.status.next});
+          $scope.goEdit();
+        };
+        $scope.goEditMultipleTypes = function() {
+          messageCenterService.add('success', 'Yay!', {status: messageCenterService.status.next});
+          messageCenterService.add('danger', 'Something went wrong!', {status: messageCenterService.status.next});
+          $scope.goEdit();
+        };
+        $scope.goEditFailure = function() {
+          messageCenterService.add('danger', 'Something went wrong!', {status: messageCenterService.status.next});
+          $scope.goEdit();
+        };
+      })
+
+      .controller('EditController', function($scope, $location, messageCenterService) {
+        $scope.saveSuccess = function() {
+          messageCenterService.add('success', 'Saved successfully!');
+        };
+        $scope.saveMultipleSuccess = function() {
+          messageCenterService.add('success', 'Yay!');
+          messageCenterService.add('success', 'Saved successfully!');
+        };
+        $scope.saveMultipleTypes = function() {
+          messageCenterService.add('success', 'Yay!');
+          messageCenterService.add('danger', 'Something went wrong!');
+        };
+        $scope.saveFailure = function() {
+          messageCenterService.add('danger', 'Something went wrong!');
+        };
+        $scope.saveSuccessGoHome = function() {
+          messageCenterService.add('success', 'Saved successfully and went home!', {status: messageCenterService.status.next});
+          $scope.goIndex();
+        };
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
+      })
+
+      .controller('AllowHTMLController', function($scope, $location, messageCenterService) {
+        $scope.allowedHTML = function() {
+          messageCenterService.add('success', '<strong>HTML</strong> <em>is</em> <span>allowed</span>.', {html: true});
+        };
+        $scope.plainText = function() {
+          messageCenterService.add('warning', '<strong>HTML</strong> <em>is</em> NOT <span>allowed</span>.');
+        };
+      })
+
+      .controller('PermanentController', function($scope, $location, messageCenterService) {
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
+      })
+      ;
+    </script>
+  </head>
+
+  <body data-ng-app="messageCenter.e2e">
+    <script type="text/ng-template" id="home">
+      <article data-ng-controller="HomeController" >
+        <div mc-messages></div>
+        <h1>Home</h1>
+        <button id="goIndex" data-ng-click="goIndex()">Index page</button>
+        <button id="goEdit" data-ng-click="goEdit()">Edit page</button>
+        <button id="goHTML" data-ng-click="goHTML()">HTML page</button>
+        <button id="goPermanent" data-ng-click="goPermanent()">Permanent page</button>
+        <button id="goEditSuccess" data-ng-click="goEditSuccess()">Edit (success)</button>
+        <button id="goEditMultipleSuccess" data-ng-click="goEditMultipleSuccess()">Edit (multiple success)</button>
+        <button id="goEditMultipleTypes" data-ng-click="goEditMultipleTypes()">Edit (multiple types)</button>
+        <button id="goEditFailure" data-ng-click="goEditFailure()">Edit (failure)</button>
+        <button id="testPermanent" data-ng-click="testPermanent()">Test permanent</button>
+        <button id="testPermanentClose" data-ng-click="testPermanent()">Test permanent (close)</button>
+      </article>
+    </script>
+
+    <script type="text/ng-template" id="edit">
+      <article data-ng-controller="EditController">
+        <div mc-messages></div>
+        <h1>Edit</h1>
+        <button id="saveSuccess" data-ng-click="saveSuccess()">Save</button>
+        <button id="saveMultipleSuccess" data-ng-click="saveMultipleSuccess()">Save (multiple success)</button>
+        <button id="saveMultipleTypes" data-ng-click="saveMultipleTypes()">Save (multiple types)</button>
+        <button id="saveFailure" data-ng-click="saveFailure()">Save (failure)</button>
+        <button id="saveSuccessGoHome" data-ng-click="saveSuccessGoHome()">Save and Go Home</button>
+
+      </article>
+    </script>
+
+    <script type="text/ng-template" id="html">
+      <article data-ng-controller="AllowHTMLController">
+        <div mc-messages></div>
+        <h1>HTML</h1>
+        <button id="allowedHTML" data-ng-click="allowedHTML()">Allowed HTML</button>
+        <button id="plainText" data-ng-click="plainText()">Plain Text</button>
+      </article>
+    </script>
+
+    <script type="text/ng-template" id="permanent">
+      <article data-ng-controller="PermanentController">
+          <div mc-messages></div>
+          <h1>Permanent</h1>
+          <button id="goIndex" data-ng-click="goIndex()">Index page</button>
+      </article>
+    </script>
+
+
+    <article data-ng-view />
+  </body>
+</html>
