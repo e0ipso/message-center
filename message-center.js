@@ -10,6 +10,7 @@ MessageCenterModule.
     function ($rootScope, $sce, $timeout) {
       return {
         mcMessages: this.mcMessages || [],
+        offlistener: this.offlistener || undefined,
         status: {
           unseen: 'unseen',
           shown: 'shown',
@@ -65,11 +66,11 @@ MessageCenterModule.
             if (!this.mcMessages[index].processed) {
               if (this.mcMessages[index].status == this.status.unseen) {
                 this.mcMessages[index].status = this.status.shown;
+                this.mcMessages[index].processed = true;
               }
               else if (this.mcMessages[index].status == this.status.next) {
                 this.mcMessages[index].status = this.status.unseen;
               }
-              this.mcMessages[index].processed = true;
             }
           }
         },
@@ -110,8 +111,9 @@ MessageCenterModule.
           $rootScope.mcMessages = messageCenterService.mcMessages;
           messageCenterService.flush();
         };
-        $rootScope.$on('$locationChangeStart', changeReaction);
-
+        if (messageCenterService.offlistener === undefined) {
+          messageCenterService.offlistener = $rootScope.$on('$locationChangeSuccess', changeReaction);
+        }
         scope.animation = attrs.animation || 'fade in';
       }
     };

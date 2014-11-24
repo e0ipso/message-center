@@ -1,4 +1,4 @@
-describe('Message Center', function() {
+describe('Message Center with single directive', function() {
 
   beforeEach(module('MessageCenterModule'));
 
@@ -88,7 +88,7 @@ describe('Message Center', function() {
     });
   });
   
-  describe('after navigating to multiple different views', function () {
+  describe('after navigating to multiple different views with permanent message', function () {
     beforeEach(function () {
       element('#goPermanent').click();
     });
@@ -127,6 +127,21 @@ describe('Message Center', function() {
       element('#goIndex').click();
       messages = element('div#mc-messages-wrapper .alert');
       expect(messages.count()).toBe(0);
+    });
+  });
+
+  describe('after navigating to multiple different views with next message', function () {
+    it('clears the next message', function () {
+      element('#goEditSuccess').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
+      expect(messages.text()).toMatch('You have reached the edit page!');
+      element('#saveSuccessGoHome').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
+      expect(messages.text()).toMatch('Saved successfully and went home!');
     });
   });
 
@@ -200,6 +215,34 @@ describe('Message Center', function() {
       var somethingWrong = element('div#mc-messages-wrapper .alert:nth-of-type(2)');
       expect(somethingWrong.prop('className')).toEqual('alert alert-danger fade in');
       expect(somethingWrong.text()).toMatch('Something went wrong!');
+    });
+  });
+});
+
+describe('Message Center with multiple directives', function() {
+
+  beforeEach(module('MessageCenterModule'));
+
+  beforeEach(function() { browser().navigateTo('/index3.html'); });
+
+  it('renders an empty ordered list on its initial state', function() {
+    expect(element('div#mc-messages-wrapper').count()).toBe(1);
+    expect(element('div#mc-messages-wrapper .alert').count()).toBe(0);
+  });
+
+  describe('when navigating through two views', function() {
+
+    it('renders a message with the default "success" level', function() {
+      element('#goEditSuccess').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
+      expect(messages.text()).toMatch('You have reached the edit page!');
+      element('#saveSuccessGoHome').click();
+      messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(1);
+      expect(messages.prop('className')).toEqual('alert alert-success fade in');
+      expect(messages.text()).toMatch('Saved successfully and went home!');
     });
   });
 });

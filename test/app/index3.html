@@ -93,6 +93,7 @@
   <body data-ng-app="messageCenter.e2e">
     <script type="text/ng-template" id="home">
       <article data-ng-controller="HomeController" >
+        <div mc-messages></div>
         <h1>Home</h1>
         <button id="goIndex" data-ng-click="goIndex()">Index page</button>
         <button id="goEdit" data-ng-click="goEdit()">Edit page</button>
@@ -109,6 +110,7 @@
 
     <script type="text/ng-template" id="edit">
       <article data-ng-controller="EditController">
+        <div mc-messages></div>
         <h1>Edit</h1>
         <button id="saveSuccess" data-ng-click="saveSuccess()">Save</button>
         <button id="saveMultipleSuccess" data-ng-click="saveMultipleSuccess()">Save (multiple success)</button>
@@ -121,6 +123,7 @@
 
     <script type="text/ng-template" id="html">
       <article data-ng-controller="AllowHTMLController">
+        <div mc-messages></div>
         <h1>HTML</h1>
         <button id="allowedHTML" data-ng-click="allowedHTML()">Allowed HTML</button>
         <button id="plainText" data-ng-click="plainText()">Plain Text</button>
@@ -129,12 +132,13 @@
 
     <script type="text/ng-template" id="permanent">
       <article data-ng-controller="PermanentController">
-        <h1>Permanent</h1>
+          <div mc-messages></div>
+          <h1>Permanent</h1>
           <button id="goIndex" data-ng-click="goIndex()">Index page</button>
       </article>
     </script>
 
-    <div mc-messages></div>
+
     <article data-ng-view />
   </body>
 </html>
