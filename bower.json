@@ -5,6 +5,7 @@
   "keywords"        : [ "angular", "js", "messages", "alert", "bootstrap" ],
   "author"          : "Mateu Aguiló Bosch <mateu.aguilo.bosch@gmail.com>",
   "readmeFilename"  : "README.md",
+  "main"            : "message-center.js",
   "dependencies"    : {
     "angular"       : ">=1.2.0 <1.4.0",
     "angular-route" : ">=1.2.0 <1.4.0",
