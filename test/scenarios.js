@@ -246,3 +246,26 @@ describe('Message Center with multiple directives', function() {
     });
   });
 });
+
+
+describe('Message Center with global configurations', function() {
+
+  beforeEach(module('MessageCenterModule'));
+
+  beforeEach(function() { browser().navigateTo('/index4.html'); });
+
+  it('renders an empty ordered list on its initial state', function() {
+    expect(element('div#mc-messages-wrapper').count()).toBe(1);
+    expect(element('div#mc-messages-wrapper .alert').count()).toBe(0);
+  });
+
+  describe('when navigating through two views', function() {
+
+    it('renders a message with the default "success" level', function() {
+      element('#goEditSuccess').click();
+      var messages = element('div#mc-messages-wrapper .alert');
+      expect(messages.count()).toBe(0);
+  
+    });
+  });
+});
