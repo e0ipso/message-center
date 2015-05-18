@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="components/angular/angular.js"></script>
+    <script src="components/angular-route/angular-route.js"></script>
+    <script src="message-center.js"></script>
+    <script>
+      angular.module('messageCenter.e2e', ['MessageCenterModule', 'ngRoute'])
+      .config(function($routeProvider,$messageCenterServiceProvider) {
+        $messageCenterServiceProvider.setGlobalOptions({
+        timeout:1000
+      });
+        $routeProvider
+          .when('/',     { templateUrl: 'home' })
+          .when('/edit', { templateUrl: 'edit' })
+      })
+
+      .controller('HomeController', function($scope, $location, messageCenterService) {
+        $scope.goIndex = function() {
+          $location.path('/');
+        };
+
+        $scope.goEditSuccess = function() {
+          messageCenterService.add('success', 'You have reached the edit page!');
+         
+        };
+      })
+    </script>
+  </head>
+
+  <body data-ng-app="messageCenter.e2e">
+    <script type="text/ng-template" id="home">
+      <article data-ng-controller="HomeController" >
+        <div mc-messages></div>
+        <h1>Home</h1>
+        <button id="goEditSuccess" data-ng-click="goEditSuccess()">Edit (success)</button>
+      </article>
+    </script>
+
+
+
+    <article data-ng-view />
+  </body>
+</html>

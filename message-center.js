@@ -5,9 +5,26 @@
 var MessageCenterModule = angular.module('MessageCenterModule', []);
 
 // Define a service to inject.
-MessageCenterModule.
-  service('messageCenterService', ['$rootScope', '$sce', '$timeout',
-    function ($rootScope, $sce, $timeout) {
+MessageCenterModule
+  .provider("$messageCenterService", function() {
+    var _this = this;
+    _this.options = {};
+    _this.setGlobalOptions = function(options) {
+      _this.options = options;
+    }
+    _this.getOptions = function(options) {
+      return _this.options;
+    }
+    this.$get = function() {
+      return {
+        setGlobalOptions: _this.setGlobalOptions,
+        options: _this.options,
+        getOptions: _this.getOptions
+      }
+    }
+  })
+  .service('messageCenterService', ['$rootScope', '$sce', '$timeout','$messageCenterService',
+    function ($rootScope, $sce, $timeout,$messageCenterService) {
       return {
         mcMessages: this.mcMessages || [],
         offlistener: this.offlistener || undefined,
@@ -26,6 +43,7 @@ MessageCenterModule.
           var availableTypes = ['info', 'warning', 'danger', 'success'],
             service = this;
           options = options || {};
+          var options = angular.extend($messageCenterService.getOptions(), options);
           if (availableTypes.indexOf(type) == -1) {
             throw "Invalid message type";
           }
