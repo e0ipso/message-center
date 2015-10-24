@@ -106,11 +106,12 @@ MessageCenterModule.
       <div class="alert alert-{{ message.type }} {{ animation }}" ng-repeat="message in mcMessages">\
         <a class="close" ng-click="message.close();" data-dismiss="alert" aria-hidden="true">&times;</a>\
         <span ng-switch on="message.html">\
-        <span ng-switch-when="true">\
-          <span ng-bind-html="message.message"></span>\
-        </span>\
-        <span ng-switch-default>\
-          {{ message.message }}\
+          <span ng-switch-when="true">\
+            <span ng-bind-html="message.message"></span>\
+          </span>\
+          <span ng-switch-default>\
+            {{ message.message }}\
+          </span>\
         </span>\
       </div>\
     </div>\
