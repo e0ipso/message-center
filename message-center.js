@@ -74,7 +74,7 @@ MessageCenterModule.
   directive('mcMessages', ['$rootScope', 'messageCenterService', function ($rootScope, messageCenterService) {
     /*jshint multistr: true */
     var templateString = '\
-    <div id="mc-messages-wrapper">\
+    <div id="mc-messages-wrapper" style="z-index:999">\
       <div class="alert alert-{{ message.type }} fade in" ng-repeat="message in mcMessages">\
         <a class="close" ng-click="message.close();" data-dismiss="alert" aria-hidden="true">&times;</a>\
         <span ng-switch on="message.html">\
