@@ -73,3 +73,9 @@ The directive `mcMessages` will allow you to place the messages wherever you wan
 
 ## Bootstrap
 This messages integrate seamlessly with the alerts from Twitter bootstrap.
+
+## Installation
+
+```
+bower install message-center --save
+```
