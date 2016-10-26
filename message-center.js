@@ -43,7 +43,7 @@ MessageCenterModule
           var availableTypes = ['info', 'warning', 'danger', 'success'],
             service = this;
           options = options || {};
-          var options = angular.extend($messageCenterService.getOptions(), options);
+          var options = angular.extend({}, $messageCenterService.getOptions(), options);
           if (availableTypes.indexOf(type) == -1) {
             throw "Invalid message type";
           }
