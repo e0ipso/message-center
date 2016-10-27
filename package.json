@@ -14,13 +14,15 @@
   "author": "Mateu Aguiló Bosch <mateu.aguilo.bosch@gmail.com>",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "connect": "2.23",
+    "bower": "1.7",
+    "connect": "3.5",
     "connect-route": "0.1",
-    "uglify-js": "2.4",
-    "bower": "1.3",
-    "karma": "0.12",
-    "karma-mocha": "0.1",
-    "karma-ng-scenario": "0.1",
-    "karma-phantomjs-launcher": "0.1"
+    "karma": "1.3",
+    "karma-mocha": "1.2",
+    "karma-ng-scenario": "1.0",
+    "karma-phantomjs-launcher": "1.0",
+    "mocha": "^3.1.2",
+    "serve-static": "^1.11.1",
+    "uglify-js": "2.7"
   }
 }
